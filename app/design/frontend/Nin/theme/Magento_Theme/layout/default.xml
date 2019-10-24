@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="change_region"
+                   template="Magento_Theme::change_region.phtml"
+                   before="top.links"/>
+        </referenceContainer>
+        <referenceBlock name="register-link" remove="true"/>
+
+        <referenceBlock name="top.links">
+            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link"
+                   template="Magento_Customer::account/link/authorization.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="header-wrapper">
+            <container name="right-elements-wrapper" htmlTag="div" htmlClass="right-elements-wrapper">
+                <block class="Magento\Cms\Block\Block" name="order-and-links-block" after="top.search">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">order-and-links-block</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+        <move element="top.search" destination="right-elements-wrapper" before="-"/>
+        <move element="minicart" destination="right-elements-wrapper" after="order-and-links-block"/>
+        <referenceBlock name="store.links" remove="true"/>
+        <referenceBlock  name="store.menu">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">ааааа</argument>
+            </arguments>
+            <action method="unsTitle"/>
+            <block class="Magento\Cms\Block\Block" name="nav-order-and-links-block" after="top.search" group="navigation-sections">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">order-and-links-block</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="nav_change_region"
+                   template="Magento_Theme::change_region.phtml"
+                   before="top.links"/>
+        </referenceBlock>
+    </body>
+</page>
